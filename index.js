@@ -30,10 +30,11 @@ console.log('örnek görev:', ilkiniDon(['as','sa'],function(metin){return metin
   Aşağıdaki skor1 ve skor2 kodlarını inceleyiniz ve aşağıdaki soruları altına not alarak cevaplayın
   
   1. skor1 ve skor2 arasındaki fark nedir?
-  
+  skor 1 local scope temsil etmekteyken skor 2 global bir scope'u temsil etmektedir. 
   2. Hangisi bir closure kullanmaktadır? Nasıl tarif edebilirsin? (yarınki derste öğreneceksin :) )
-  
+  Birbirini içeren fonksiyonlar (inclusive) closure oluşturur. Buna örnek skor 1'dir.
   3. Hangi durumda skor1 tercih edilebilir? Hangi durumda skor2 daha mantıklıdır?
+  Eğer bilgilerimiz saklı dursun ve herkes kodumuzu değiştirmesin istiyorsak local scope kullanmak daha mantıklıdır, ayrıca daha net sonuçlar elde edebiliriz. Fakat global scope'un yönetimi daha karmaşık olmakla beraber ayrıca daha ulaşılabilirdir. 
 */
 
 // skor1 kodları
@@ -64,11 +65,13 @@ Aşağıdaki takimSkoru() fonksiyonununda aşağıdakileri yapınız:
 Not: Bu fonskiyon, aşağıdaki diğer görevler için de bir callback fonksiyonu olarak da kullanılacak
 */
 
-function takimSkoru(/*Kodunuzu buraya yazınız*/){
-    /*Kodunuzu buraya yazınız*/
+function takimSkoru() {
+  const minSkor = 10;
+  const maxSkor = 25;
+  return Math.floor(Math.random() * (maxSkor - minSkor + 1)) + minSkor;
 }
 
-
+console.log(takimSkoru());
 
 
 /* Görev 3: macSonucu() 
@@ -86,13 +89,21 @@ Aşağıdaki macSonucu() fonksiyonununda aşağıdakileri yapınız:
 }
 */ 
 
-function macSonucu(/*Kodunuzu buraya yazınız*/){
-  /*Kodunuzu buraya yazınız*/
+function macSonucu(callback, quarterNo) {
+  let homeScore = 0;
+  let hostScore = 0;
+
+  for(let i = 0; i < quarterNo; i++){
+    homeScore = homeScore + callback();
+    hostScore = hostScore + callback();
+  }
+  let sumObject = {
+    "EvSahibi": homeScore,
+    "KonukTakim": hostScore
+  }
+  return sumObject;
 }
-
-
-
-
+console.log(macSonucu(takimSkoru, 4));
 
 
 /* Zorlayıcı Görev 4: periyotSkoru()
@@ -109,8 +120,17 @@ Aşağıdaki periyotSkoru() fonksiyonununda aşağıdakileri yapınız:
   */
 
 
-function periyotSkoru(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function periyotSkoru(skorPeriyot) {
+  const homeObject = takimSkoru();
+  const hostObject = takimSkoru();
+
+return {
+  EvSahibi: homeObject,
+  KonukTakim: hostObject,
+
+};
+
+console.log(takimSkoru);
 
 }
 
@@ -146,8 +166,20 @@ MAÇ UZAR ise skorTabelasi(periyotSkoru,takimSkoru,4)
 ] */
 // NOTE: Bununla ilgili bir test yoktur. Eğer logladığınız sonuçlar yukarıdakine benziyor ise tmamlandı sayabilirsiniz.
 
-function skorTabelasi(/*Kodunuzu buraya yazınız*/) {
-  /*Kodunuzu buraya yazınız*/
+function skorTabelasi(periyotSkoru, takimSkoru, skorP) {
+  const scoreArray = [];
+
+  let teamScores = {
+    EvSahibi: 0,
+    KonukTakim: 0,
+
+  };
+  for(let i = 0; i <= skorP; i++) {
+    const periyotScoreResult = periyotSkoruP(takimSkoruP);
+    const hSc = periyotScoreResult.EvSahibi;
+    const gSc = periyotScoreResult.KonukTakim;
+    teamScores 
+  }
 }
 
 
